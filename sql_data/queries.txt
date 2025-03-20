@@ -1,0 +1,50 @@
+CREATE TABLE Train (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    train_number INT NOT NULL,
+    train_name VARCHAR(100) NOT NULL,
+    from_station VARCHAR(100) NOT NULL,
+    to_station VARCHAR(100) NOT NULL,
+    available INT DEFAULT 0,
+    fare DECIMAL(6,2) NOT NULL,
+    date DATE DEFAULT NULL,
+    time TIME DEFAULT NULL
+);
+INSERT INTO Train (train_number, train_name, from_station, to_station, available, fare, date, time)
+VALUES 
+(101, 'Shatabdi Express', 'Mumbai', 'Delhi', 100, 1500.50, '2025-03-15', '08:30:00'),
+(102, 'Rajdhani Express', 'Kolkata', 'Delhi', 200, 2500.75, '2025-03-16', '10:00:00');
+
+
+CREATE TABLE Passenger (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    train_id INT NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    age INT NOT NULL,
+    gender VARCHAR(10) NOT NULL,
+    nationality VARCHAR(100) NOT NULL,
+    email VARCHAR(254) NOT NULL,
+    address VARCHAR(100) NOT NULL,
+    berth VARCHAR(20) NOT NULL,
+    acCategory VARCHAR(50) NOT NULL,
+    FOREIGN KEY (train_id) REFERENCES Train(id) ON DELETE CASCADE
+);
+INSERT INTO Passenger (train_id, name, age, gender, nationality, email, address, berth, acCategory)
+VALUES 
+(1, 'John Doe', 30, 'Male', 'Indian', 'john@example.com', '456 Avenue, City', 'Upper', 'AC First Class'),
+(2, 'Jane Smith', 25, 'Female', 'American', 'jane@example.com', '789 Road, City', 'Lower', 'AC Second Class');
+
+
+
+CREATE TABLE UserProfile (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,  -- No foreign key constraint
+    aadhar VARCHAR(20) NOT NULL,
+    dob DATE NOT NULL,
+    address VARCHAR(100) NOT NULL,
+    phoneno VARCHAR(15) NOT NULL,
+    mailid VARCHAR(254) NOT NULL
+);
+
+INSERT INTO UserProfile (user_id, aadhar, dob, address, phoneno, mailid)
+VALUES 
+(1, '123456789012', '1995-05-20', '123 Street, City', '9876543210', 'user@example.com');

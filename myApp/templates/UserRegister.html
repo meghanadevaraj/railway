@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>User Register</title>
+	<!-- <link rel="stylesheet" href="../static/UserRegister.css"> -->
+	<link rel="stylesheet" href="{% static 'UserRegister.css' %}">
+	<style>
+		.logo2 {
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			height: 200px;
+		}
+		.main {
+			text-align: center; /* Center align the buttons */
+		}
+		.messages {
+        list-style-type: none;
+        padding: 10px;
+        margin: 10px 0;
+    }
+    .messages li {
+        padding: 10px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+    .success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+    .error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+    .info {
+        background-color: #d1ecf1;
+        color: #0c5460;
+        border: 1px solid #bee5eb;
+    }
+    .warning {
+        background-color: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeeba;
+    }
+	</style>
+</head>
+<body>
+<header>
+	<!-- <img src="../static/logo2.png" alt="Logo" class="logo2"> -->
+	<img src="{% static 'logo2.png' %}" alt="Logo" class="logo2">
+	<h1 class="hd" id="heading">S R T</h1>
+	<div class="main">
+        <p1 class="menu"><a href="{% url 'myApp:user-login' %}">Login as User</a></p1>
+        <p1 class="menu"><a href="{% url 'myApp:user-register' %}">New User Register</a></p1>
+        <p1 class="menu"><a href="{% url 'myApp:admin-login' %}">Login as Admin</a></p1>
+    </div>
+</header>
+<table class="tab brown">
+	<tr>
+		<td>New User Registration</td>
+	</tr>
+</table>
+
+<table class="tab green" border="0px">
+	<tr>
+		<td>
+			<form action="{% url 'myApp:user-register' %}" method="post">
+				{% csrf_token %}
+				Username: <input type="text" name="uname" placeholder="Enter Username" required><br/><br/>
+				Password: <input type="password" name="pword" required><br/><br/>
+				Aadhar: <input type="text" name="aadhar" required><br/><br/>
+				D.O.B: <input type="date" name="dob" required><br/><br/>
+				Address: <input type="text" name="address" required><br/><br/>
+				Phone No: <input type="number" name="phoneno" required><br/><br/>
+				Email Id: <input type="email" name="mailid" required><br/><br/>
+				<input type="submit" value="I AGREE FOR ALL TERMS & CONDITIONS! REGISTER ME" class="button">
+			</form>
+		</td>
+	</tr>
+</table>
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+		<li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<script>
+	var heading = document.getElementById("heading");
+	var headings = ["SOUTHZONE RAILWAY TICKETS", "Welcome to SRT", "Book your train tickets with ease"];
+	var index = 0;
+
+	setInterval(function() {
+		heading.textContent = headings[index];
+		index = (index + 1) % headings.length;
+	}, 2500);
+</script>
+</body>
+</html>
