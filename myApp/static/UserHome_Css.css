@@ -1,6 +1,7 @@
 *{
     box-sizing: border-box;
 }
+<<<<<<< HEAD
 body{
     background-image: url(nature.jpg);
     background-repeat:repeat;
@@ -9,6 +10,16 @@ body{
     margin-right: 10%;
     
 }
+=======
+body {
+    background: none !important;
+    background-color: #ADD8E6 !important; /* Light Blue */
+    background-image: none;    /* Removes any background image */
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+>>>>>>> ea11651 (Available status)
 .hd {
 color: DeepPink;
 font-weight: bold;

@@ -61,10 +61,52 @@ def my_bookings(request):
 def pnr_status(request):
     context = {}
     return render(request, "PNRStatus.html", context)
+<<<<<<< HEAD
 def avail_ability(request):
     context = {}
     return render(request, "Availability.html", context)
 
+=======
+
+from django.shortcuts import render
+
+# Define the total seats available for all trains
+TOTAL_SEATS = 700  
+
+from django.shortcuts import render
+
+
+# Define the total seats available for all trains
+TOTAL_SEATS = 700  
+
+def avail_ability(request):
+    context = {}
+
+    if request.method == "POST":
+        train_number = request.POST.get("trainnumber")
+        seats_requested = request.POST.get("seats")
+
+        # Convert seats_requested to an integer (handling invalid inputs)
+        try:
+            seats_requested = int(seats_requested)
+        except ValueError:
+            seats_requested = 0  # If invalid input, set to 0
+
+        # 🚀 Check seat availability based on the fixed 700-seat limit
+        if 1 <= seats_requested <= TOTAL_SEATS:
+            availability_status = f"✅ {seats_requested} seats are available for Train {train_number}."
+        else:
+            availability_status = "❌ Requested seats exceed the available limit (700)!"
+
+        # Pass the values to the template
+        context = {
+            "train_number": train_number,
+            "seats_requested": seats_requested,
+            "availability_status": availability_status,
+        }
+
+    return render(request, "Availability.html", context)
+>>>>>>> ea11651 (Available status)
 
 def user_profile(request):
     # Retrieve the user's profile using the logged-in user's information

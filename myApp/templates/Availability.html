@@ -30,6 +30,34 @@
     right: 0px;
     height: 200px;
 }
+<<<<<<< HEAD
+=======
+
+.availability-info {
+    text-align: center; /* Centers text */
+    background: rgba(255, 255, 255, 0.8); /* Light background for better visibility */
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+    margin: 20px auto; /* Centers the div */
+}
+
+.availability-info h2 {
+    color: #4a148c; /* Deep purple for heading */
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.availability-info p {
+    color: #2c3e50; /* Dark gray-blue for text */
+    font-size: 18px;
+}
+
+.availability-info p strong {
+    color: #d35400; /* Orange for labels */
+}
+
+>>>>>>> ea11651 (Available status)
 	</style>
 </head>
 <body>
@@ -58,11 +86,30 @@
 </header>
 <div class="main"><p1 class="menu">Book trains</p1></div>
 <div class="tab"><p1 class="menu red">Please Check The <a href="{% url 'myApp:avail-ability' %}">Seat availability</a> before Booking !</p1></div>
+<<<<<<< HEAD
 <form action="booktrains" class="tab red" method="post">
 		Train Number: <input type="text" name="trainnumber"><br/><br/>
 		No of seats:  <input type='text' name='seats'><br/><br/>
 		<input type="submit" value=" Book Now " class= "button"><br/>
 	</form><br/>
+=======
+<form action="{% url 'myApp:avail-ability' %}" class="tab red" method="post">
+	{% csrf_token %}
+		Train Number: <input type="text" name="trainnumber"><br/><br/>
+		No of seats:  <input type='text' name='seats' min="1" max="700"><br/><br/>
+		<input type="submit" value=" Check Availability " class= "button"><br/>
+	</form><br/>
+	
+	{% if train_number %}
+    <div class="availability-info" >
+        <h2>Availability Details</h2>
+        <p><strong>Train Number:</strong> {{ train_number }}</p>
+        <p><strong>Seats Requested:</strong> {{ seats_requested }}</p>
+        <p><strong>Availability Status:</strong> {{ availability_status }}</p>
+    </div>
+	{% endif %}
+
+>>>>>>> ea11651 (Available status)
 	<script>
 		var heading = document.getElementById("heading");
 		var headings = ["SOUTHZONE RAILWAY TICKETS", "Welcome to SRT", "Book your train tickets with ease"];
